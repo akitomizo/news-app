@@ -8,14 +8,6 @@ import axios from 'axios';
 
 const URL = `https://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
-const fetchArticle = async function getUser() {
-    try {
-        const response = await axios.get(URL);
-        console.log(response);
-    } catch (error) {
-        console.error(error);
-    }
-};
 const styles = StyleSheet.create({
     // container: {
     //     flex: 1,
@@ -27,13 +19,25 @@ const styles = StyleSheet.create({
 
 export default function App() {
     const [articles, setArticles] = useState();
+
+    const fetchArticle = async function getUser() {
+        try {
+            const response = await axios.get(URL);
+            // console.log(response);
+            setArticles(response.data.articles);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
+        // alert('aaa');
         // alert(Constants.manifest.extra.newsApiKey);
         fetchArticle();
-        const timer = setTimeout(() => {
-            setArticles(dummyArticles);
-        }, 2000);
-        return () => clearTimeout(timer);
+        // const timer = setTimeout(() => {
+        //     setArticles(dummyArticles);
+        // }, 2000);
+        // return () => clearTimeout(timer);
     }, []);
 
     return (
