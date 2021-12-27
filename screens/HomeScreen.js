@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     // },
 });
 
-export default function HomeScreen() {
+export default function HomeScreen(props) {
+    const { navigation } = props;
     const [articles, setArticles] = useState();
 
     const fetchArticle = async function getUser() {
@@ -49,6 +50,7 @@ export default function HomeScreen() {
                         author={item.author}
                         title={item.title}
                         key={index}
+                        onPress={() => navigation.navigate('Article')}
                     />
                 )}
                 keyExtractor={(item, index) => index.toString()}
